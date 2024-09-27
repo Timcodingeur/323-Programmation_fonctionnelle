@@ -1,28 +1,28 @@
-﻿namespace immuabl
+﻿using System.Collections.Immutable;
+
+namespace immuabl
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            List<Player> players = new List<Player>()
-            {
+            var players= ImmutableList.Create(
+            
                 new Player("Joe", 32),
                 new Player("Jack", 30),
                 new Player("William", 37),
                 new Player("Averell", 25)
-            };
+            );
 
-            // Initialize search
-            Player elder = players.First();
-            int biggestAge = elder.Age;
-
+            Player elder = new ("j", 1);
+            
             // search
             foreach (Player p in players)
             {
-                if (p.Age > biggestAge) // memorize new elder
+                if (p.Age > elder.Age) 
                 {
-                    elder = p;
-                    biggestAge = p.Age; // for future loops
+                    elder = new Player(p.Name, p.Age);
+
                 }
             }
 
@@ -30,8 +30,12 @@
 
             Console.ReadKey();
         }
-        
+        public void execution()
+        {
+
+        }
     }
+
     public class Player
     {
         private readonly string _name;
@@ -47,5 +51,6 @@
 
         public int Age => _age;
     }
+
 }
 
